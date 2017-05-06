@@ -125,7 +125,8 @@ class LearningAgent(Agent):
                 action = random.choice(self.valid_actions)
             else:
                 maxQ = self.get_maxQ(state)
-                action = max(self.Q[state], key=lambda x: self.Q[state][x])
+                # action = max(self.Q[state], key=lambda x: self.Q[state][x])
+                action = random.choice([a for a, v in self.Q[state].items() if v == maxQ])               
 
         return action
 
@@ -201,7 +202,7 @@ def run():
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(n_test=10, tolerance=0.01)
+    sim.run(n_test=50, tolerance=0.009)
 
 
 if __name__ == '__main__':
