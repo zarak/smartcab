@@ -16342,7 +16342,7 @@ The rating of A+ is the highest rating possible for safety, which is satisfactor
  -- None : -4.45
  -- right : 0.54
  -- left : -19.71</code></pre>
-<p>In this case, although the waypoint declares that the agent should turn left, the highest reward is to turn right, which is going in the opposite direction. This may seem counterintuitive at first, but when one considers the grid-like nature of the environment, it is not terribly inefficient to make a series of right turns instead of a single left turn, and it is probably safer. It is also worth noting that the penalty for idling on a green light is quite high.</p>
+<p>In this case, although the waypoint declares that the agent should turn left, the highest reward is to turn right, which is going in the opposite direction. This may seem counterintuitive at first, but when one considers the grid-like nature of the environment, it is not terribly inefficient to make a series of right turns instead of a single left turn, and it is probably safer. It is also worth noting that the penalty for idling on a green light is quite high. Ultimately, I would still expect forward to be a better policy, so some more investigation into this behaviour would certainly be warranted.</p>
 
 </div>
 </div>
@@ -16373,7 +16373,8 @@ The rating of A+ is the highest rating possible for safety, which is satisfactor
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong></p>
+<p><strong>Answer:</strong>  The actions that the smartcab takes before reaching the destination depends on where on the grid the destination is in relation to the smartcab. If the location of the smartcab or destination is randomly initialized on the grid, then it is impossible to know a priori which sequence of actions should yield the best path.<br>
+The environment has the global property of acting like the surface of a sphere - that is, the traffic wraps around the edges infinitely. Although we can see the entire environment, the agent cannot - it only has knowledge of the information it receives in the state tuple we created. Therefore, in some situations, given the same agent starting location and destination, there may be a different sequence of optimal actions which depends on the precise timing of the state of all the traffic lights and other cars along the way. All this variation creates an environment with too many possibilities for the agent to effectively learn in.</p>
 
 </div>
 </div>
